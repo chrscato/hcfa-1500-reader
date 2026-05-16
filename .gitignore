@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+.eggs/
+.venv/
+venv/
+
+# Generated data — ignore by default
+data/
+*.png
+*.pdf
+# But keep the small examples set + the form template + docs
+!examples/**
+!form-cms1500.pdf
+!docs/**/*.png
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+.pytest_cache/
+__render_test.*
+
+# Tooling state
+.claude/
+
+# Unrelated local docs (excluded from this OSS repo)
+wcfs-mvp-plan.md

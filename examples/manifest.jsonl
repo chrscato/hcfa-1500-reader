@@ -1,0 +1,12 @@
+{"sample_id": "00000", "tier": "pristine", "seed": 1000, "image": "pristine\\00000.png", "json": "pristine\\00000.json", "pdf": null}
+{"sample_id": "00001", "tier": "clean_scan", "seed": 1001, "image": "clean_scan\\00001.png", "json": "clean_scan\\00001.json", "pdf": null}
+{"sample_id": "00002", "tier": "worn_scan", "seed": 1002, "image": "worn_scan\\00002.png", "json": "worn_scan\\00002.json", "pdf": null}
+{"sample_id": "00003", "tier": "fax", "seed": 1003, "image": "fax\\00003.png", "json": "fax\\00003.json", "pdf": null}
+{"sample_id": "00004", "tier": "phone_photo", "seed": 1004, "image": "phone_photo\\00004.png", "json": "phone_photo\\00004.json", "pdf": null}
+{"sample_id": "00005", "tier": "worst", "seed": 1005, "image": "worst\\00005.png", "json": "worst\\00005.json", "pdf": null}
+{"sample_id": "00006", "tier": "pristine", "seed": 1006, "image": "pristine\\00006.png", "json": "pristine\\00006.json", "pdf": null}
+{"sample_id": "00007", "tier": "clean_scan", "seed": 1007, "image": "clean_scan\\00007.png", "json": "clean_scan\\00007.json", "pdf": null}
+{"sample_id": "00008", "tier": "worn_scan", "seed": 1008, "image": "worn_scan\\00008.png", "json": "worn_scan\\00008.json", "pdf": null}
+{"sample_id": "00009", "tier": "fax", "seed": 1009, "image": "fax\\00009.png", "json": "fax\\00009.json", "pdf": null}
+{"sample_id": "00010", "tier": "phone_photo", "seed": 1010, "image": "phone_photo\\00010.png", "json": "phone_photo\\00010.json", "pdf": null}
+{"sample_id": "00011", "tier": "worst", "seed": 1011, "image": "worst\\00011.png", "json": "worst\\00011.json", "pdf": null}

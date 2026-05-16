@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hcfa-synth"
+version = "0.1.0"
+description = "Synthetic CMS-1500 (HCFA) form generator with difficulty tiers"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Chris Cato" }]
+dependencies = [
+    "pypdf>=5.0",
+    "pypdfium2>=4.30",
+    "faker>=30",
+    "pillow>=10",
+    "opencv-python>=4.10",
+    "numpy>=1.26",
+]
+
+[project.scripts]
+hcfa-synth = "hcfa_synth.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["hcfa_synth*"]
+
+[tool.setuptools.package-data]
+hcfa_synth = ["codes/*.csv"]

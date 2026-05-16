@@ -1,0 +1,248 @@
+code,description
+A09,Infectious gastroenteritis and colitis unspecified
+B00.9,Herpesviral infection unspecified
+B34.9,Viral infection unspecified
+B37.0,Candidal stomatitis
+B86,Scabies
+C50.911,Malignant neoplasm of breast right female unspecified site
+C61,Malignant neoplasm of prostate
+C78.00,Secondary malignant neoplasm of unspecified lung
+C79.31,Secondary malignant neoplasm of brain
+D12.6,Benign neoplasm of colon unspecified
+D17.9,Benign lipomatous neoplasm unspecified
+D22.9,Melanocytic nevi unspecified
+D23.9,Other benign neoplasm of skin unspecified
+D25.9,Leiomyoma of uterus unspecified
+D50.9,Iron deficiency anemia unspecified
+D64.9,Anemia unspecified
+E03.9,Hypothyroidism unspecified
+E04.2,Nontoxic multinodular goiter
+E05.90,Thyrotoxicosis unspecified without thyrotoxic crisis
+E06.3,Autoimmune thyroiditis
+E08.9,Diabetes mellitus due to underlying condition without complications
+E10.9,Type 1 diabetes mellitus without complications
+E11.21,Type 2 diabetes mellitus with diabetic nephropathy
+E11.22,Type 2 diabetes mellitus with diabetic chronic kidney disease
+E11.319,Type 2 diabetes mellitus with unspecified diabetic retinopathy without macular edema
+E11.40,Type 2 diabetes mellitus with diabetic neuropathy unspecified
+E11.65,Type 2 diabetes mellitus with hyperglycemia
+E11.69,Type 2 diabetes mellitus with other specified complication
+E11.9,Type 2 diabetes mellitus without complications
+E55.9,Vitamin D deficiency unspecified
+E66.01,Morbid (severe) obesity due to excess calories
+E66.3,Overweight
+E66.9,Obesity unspecified
+E78.00,Pure hypercholesterolemia unspecified
+E78.2,Mixed hyperlipidemia
+E78.5,Hyperlipidemia unspecified
+E83.42,Hypomagnesemia
+E86.0,Dehydration
+E87.1,Hypo-osmolality and hyponatremia
+E87.6,Hypokalemia
+F10.20,Alcohol dependence uncomplicated
+F11.20,Opioid dependence uncomplicated
+F17.210,Nicotine dependence cigarettes uncomplicated
+F19.20,Other psychoactive substance dependence uncomplicated
+F31.9,Bipolar disorder unspecified
+F32.9,Major depressive disorder single episode unspecified
+F33.1,Major depressive disorder recurrent moderate
+F39,Unspecified mood [affective] disorder
+F41.1,Generalized anxiety disorder
+F41.9,Anxiety disorder unspecified
+F43.10,Post-traumatic stress disorder unspecified
+F43.20,Adjustment disorder unspecified
+F50.00,Anorexia nervosa unspecified
+F84.0,Autistic disorder
+F90.0,Attention-deficit hyperactivity disorder predominantly inattentive type
+F90.2,Attention-deficit hyperactivity disorder combined type
+F90.9,Attention-deficit hyperactivity disorder unspecified type
+G20,Parkinson's disease
+G25.0,Essential tremor
+G35,Multiple sclerosis
+G40.909,Epilepsy unspecified not intractable without status epilepticus
+G43.909,Migraine unspecified not intractable without status migrainosus
+G47.00,Insomnia unspecified
+G47.30,Sleep apnea unspecified
+G47.33,Obstructive sleep apnea (adult) (pediatric)
+G56.00,Carpal tunnel syndrome unspecified upper limb
+G89.29,Other chronic pain
+H10.9,Unspecified conjunctivitis
+H25.9,Unspecified age-related cataract
+H40.9,Unspecified glaucoma
+H52.4,Presbyopia
+H60.90,Unspecified otitis externa unspecified ear
+H65.90,Unspecified nonsuppurative otitis media unspecified ear
+H66.90,Otitis media unspecified unspecified ear
+H81.10,Benign paroxysmal vertigo unspecified ear
+H90.5,Unspecified sensorineural hearing loss
+H91.90,Unspecified hearing loss unspecified ear
+I10,Essential (primary) hypertension
+I11.0,Hypertensive heart disease with heart failure
+I11.9,Hypertensive heart disease without heart failure
+I12.9,Hypertensive chronic kidney disease with stage 1-4 CKD
+I20.9,Angina pectoris unspecified
+I21.3,ST elevation myocardial infarction of unspecified site
+I25.10,Atherosclerotic heart disease of native coronary artery without angina pectoris
+I25.2,Old myocardial infarction
+I27.20,Pulmonary hypertension unspecified
+I35.0,Nonrheumatic aortic (valve) stenosis
+I48.0,Paroxysmal atrial fibrillation
+I48.91,Unspecified atrial fibrillation
+I50.22,Chronic systolic (congestive) heart failure
+I50.32,Chronic diastolic (congestive) heart failure
+I50.9,Heart failure unspecified
+I63.9,Cerebral infarction unspecified
+I69.351,Hemiplegia and hemiparesis following cerebral infarction right dominant side
+I73.9,Peripheral vascular disease unspecified
+I80.219,Phlebitis and thrombophlebitis of unspecified deep vessels of right lower extremity
+I82.401,Acute embolism and thrombosis of unspecified deep veins of right lower extremity
+I83.90,Asymptomatic varicose veins of unspecified lower extremity
+I87.2,Venous insufficiency (chronic) (peripheral)
+J00,Acute nasopharyngitis [common cold]
+J01.90,Acute sinusitis unspecified
+J02.9,Acute pharyngitis unspecified
+J06.9,Acute upper respiratory infection unspecified
+J11.1,Influenza due to unidentified influenza virus with other respiratory manifestations
+J18.9,Pneumonia unspecified organism
+J20.9,Acute bronchitis unspecified
+J30.9,Allergic rhinitis unspecified
+J32.9,Chronic sinusitis unspecified
+J42,Unspecified chronic bronchitis
+J44.0,Chronic obstructive pulmonary disease with (acute) lower respiratory infection
+J44.1,Chronic obstructive pulmonary disease with (acute) exacerbation
+J44.9,Chronic obstructive pulmonary disease unspecified
+J45.20,Mild intermittent asthma uncomplicated
+J45.40,Moderate persistent asthma uncomplicated
+J45.909,Unspecified asthma uncomplicated
+J96.00,Acute respiratory failure unspecified whether with hypoxia or hypercapnia
+K21.9,Gastro-esophageal reflux disease without esophagitis
+K29.70,Gastritis unspecified without bleeding
+K35.80,Unspecified acute appendicitis
+K40.90,Unilateral inguinal hernia without obstruction or gangrene not specified as recurrent
+K44.9,Diaphragmatic hernia without obstruction or gangrene
+K52.9,Noninfective gastroenteritis and colitis unspecified
+K57.30,Diverticulosis of large intestine without perforation or abscess without bleeding
+K58.9,Irritable bowel syndrome without diarrhea
+K59.00,Constipation unspecified
+K59.1,Functional diarrhea
+K62.5,Hemorrhage of anus and rectum
+K76.0,Fatty (change of) liver not elsewhere classified
+K80.20,Calculus of gallbladder without cholecystitis without obstruction
+K92.2,Gastrointestinal hemorrhage unspecified
+L02.91,Cutaneous abscess unspecified
+L03.90,Cellulitis unspecified
+L20.9,Atopic dermatitis unspecified
+L23.9,Allergic contact dermatitis unspecified cause
+L25.9,Unspecified contact dermatitis unspecified cause
+L29.9,Pruritus unspecified
+L30.9,Dermatitis unspecified
+L40.0,Psoriasis vulgaris
+L50.9,Urticaria unspecified
+L57.0,Actinic keratosis
+L70.0,Acne vulgaris
+L82.1,Other seborrheic keratosis
+L98.9,Disorder of the skin and subcutaneous tissue unspecified
+M05.79,Rheumatoid arthritis with rheumatoid factor of multiple sites without organ or systems involvement
+M10.9,Gout unspecified
+M15.9,Polyosteoarthritis unspecified
+M17.11,Unilateral primary osteoarthritis right knee
+M17.12,Unilateral primary osteoarthritis left knee
+M19.90,Unspecified osteoarthritis unspecified site
+M25.511,Pain in right shoulder
+M25.512,Pain in left shoulder
+M25.561,Pain in right knee
+M25.562,Pain in left knee
+M51.26,Other intervertebral disc displacement lumbar region
+M54.2,Cervicalgia
+M54.30,Sciatica unspecified side
+M54.40,Lumbago with sciatica unspecified side
+M54.5,Low back pain
+M54.50,Low back pain unspecified
+M54.59,Other low back pain
+M62.81,Muscle weakness (generalized)
+M75.100,Unspecified rotator cuff tear or rupture of unspecified shoulder not specified as traumatic
+M79.10,Myalgia unspecified site
+M79.7,Fibromyalgia
+M81.0,Age-related osteoporosis without current pathological fracture
+N17.9,Acute kidney failure unspecified
+N18.30,Chronic kidney disease stage 3 unspecified
+N18.6,End stage renal disease
+N18.9,Chronic kidney disease unspecified
+N20.0,Calculus of kidney
+N30.00,Acute cystitis without hematuria
+N39.0,Urinary tract infection site not specified
+N40.0,Benign prostatic hyperplasia without lower urinary tract symptoms
+N40.1,Benign prostatic hyperplasia with lower urinary tract symptoms
+N72,Inflammatory disease of cervix uteri
+N76.0,Acute vaginitis
+N92.0,Excessive and frequent menstruation with regular cycle
+N93.9,Abnormal uterine and vaginal bleeding unspecified
+N95.1,Menopausal and female climacteric states
+O09.90,Supervision of high risk pregnancy unspecified unspecified trimester
+O80,Encounter for full-term uncomplicated delivery
+P07.30,Preterm newborn unspecified weeks of gestation
+Q21.0,Ventricular septal defect
+R00.0,Tachycardia unspecified
+R03.0,Elevated blood-pressure reading without diagnosis of hypertension
+R05.9,Cough unspecified
+R06.02,Shortness of breath
+R07.9,Chest pain unspecified
+R10.9,Unspecified abdominal pain
+R11.10,Vomiting unspecified
+R11.2,Nausea with vomiting unspecified
+R19.7,Diarrhea unspecified
+R21,Rash and other nonspecific skin eruption
+R31.9,Hematuria unspecified
+R42,Dizziness and giddiness
+R50.9,Fever unspecified
+R51.9,Headache unspecified
+R53.83,Other fatigue
+R55,Syncope and collapse
+R60.0,Localized edema
+R63.0,Anorexia
+R73.03,Prediabetes
+R73.9,Hyperglycemia unspecified
+R94.31,Abnormal electrocardiogram [ECG] [EKG]
+S00.83XA,Abrasion of other part of head initial encounter
+S06.0X0A,Concussion without loss of consciousness initial encounter
+S52.501A,Unspecified fracture of the lower end of right radius initial encounter
+S72.001A,Fracture of unspecified part of neck of right femur initial encounter
+S83.511A,Sprain of anterior cruciate ligament of right knee initial encounter
+S93.401A,Sprain of unspecified ligament of right ankle initial encounter
+T14.90,Injury unspecified
+T78.40XA,Allergy unspecified initial encounter
+T88.7XXA,Unspecified adverse effect of drug or medicament initial encounter
+U07.1,COVID-19
+Z00.00,Encounter for general adult medical examination without abnormal findings
+Z00.121,Encounter for routine child health examination with abnormal findings
+Z00.129,Encounter for routine child health examination without abnormal findings
+Z01.419,Encounter for gynecological examination (general) (routine) without abnormal findings
+Z02.0,Encounter for examination for admission to educational institution
+Z02.5,Encounter for examination for participation in sport
+Z11.3,Encounter for screening for infections with a predominantly sexual mode of transmission
+Z11.51,Encounter for screening for human papillomavirus (HPV)
+Z11.59,Encounter for screening for other viral diseases
+Z12.11,Encounter for screening for malignant neoplasm of colon
+Z12.31,Encounter for screening mammogram for malignant neoplasm of breast
+Z13.220,Encounter for screening for lipoid disorders
+Z13.6,Encounter for screening for cardiovascular disorders
+Z23,Encounter for immunization
+Z34.90,Encounter for supervision of normal pregnancy unspecified unspecified trimester
+Z38.00,Single liveborn infant delivered vaginally
+Z45.02,Encounter for adjustment and management of automatic implantable cardiac defibrillator
+Z48.00,Encounter for change or removal of nonsurgical wound dressing
+Z51.11,Encounter for antineoplastic chemotherapy
+Z51.12,Encounter for antineoplastic immunotherapy
+Z66,Do not resuscitate
+Z79.01,Long term (current) use of anticoagulants
+Z79.4,Long term (current) use of insulin
+Z79.82,Long term (current) use of aspirin
+Z79.84,Long term (current) use of oral hypoglycemic drugs
+Z79.899,Other long term (current) drug therapy
+Z85.3,Personal history of malignant neoplasm of breast
+Z87.891,Personal history of nicotine dependence
+Z90.10,Acquired absence of unspecified breast and nipple
+Z95.1,Presence of aortocoronary bypass graft
+Z95.5,Presence of coronary angioplasty implant and graft
+Z96.641,Presence of right artificial hip joint
+Z96.651,Presence of right artificial knee joint

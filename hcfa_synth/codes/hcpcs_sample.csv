@@ -1,0 +1,133 @@
+code,description
+A0425,Ground mileage per statute mile
+A0427,Ambulance service ALS emergency transport
+A0428,Ambulance service BLS non-emergency transport
+A0429,Ambulance service BLS emergency transport
+A0433,Advanced life support level 2
+A4206,Syringe with needle sterile 1 cc each
+A4253,Blood glucose test or reagent strips 50 strips
+A4256,Normal low or high calibrator solution chips
+A4258,Spring-powered device for lancet each
+A4259,Lancets per box of 100
+A4595,Electrical stimulator supplies 2 lead per month
+A4641,Radiopharmaceutical diagnostic agent NOC
+A6196,Alginate dressing wound cover pad size 16 sq in or less
+A6197,Alginate dressing wound cover pad size 16-48 sq in
+A7003,Administration set with small volume nonfiltered pneumatic nebulizer
+A9270,Non-covered item or service
+A9579,Injection gadolinium-based MR contrast NOS per ml
+A9580,Sodium fluoride F-18 diagnostic per mCi
+B4034,Enteral feeding supply kit syringe fed
+B4150,Enteral formulae nutritionally complete with intact nutrients
+B4220,Parenteral nutrition supply kit premix per day
+C8957,Hospital outpatient prolonged IV infusion requiring use of pump
+C9399,Unclassified drugs or biologicals
+D0120,Periodic oral evaluation established patient
+D0140,Limited oral evaluation problem focused
+D0150,Comprehensive oral evaluation new or established patient
+D0210,Intraoral complete series of radiographic images
+D0274,Bitewings four radiographic images
+D1110,Prophylaxis adult
+D1120,Prophylaxis child
+D2140,Amalgam one surface primary or permanent
+D2330,Resin-based composite one surface anterior
+D7140,Extraction erupted tooth or exposed root
+E0100,Cane includes canes of all materials adjustable or fixed with tip
+E0114,Crutches underarm other than wood adjustable or fixed pair with pads tips and handgrips
+E0143,Walker folding wheeled adjustable or fixed height
+E0163,Commode chair mobile or stationary with fixed arms
+E0260,Hospital bed semi-electric with any type side rails with mattress
+E0277,Powered pressure-reducing air mattress
+E0424,Stationary compressed gaseous oxygen system rental
+E0431,Portable gaseous oxygen system rental
+E0445,Oximeter device for measuring blood oxygen levels non-invasively
+E0601,Continuous positive airway pressure CPAP device
+E0784,External ambulatory infusion pump insulin
+E1130,Standard wheelchair fixed full length arms fixed or swing away detachable footrests
+E1392,Portable oxygen concentrator rental
+E2402,Negative pressure wound therapy electrical pump stationary or portable
+G0008,Administration of influenza virus vaccine
+G0009,Administration of pneumococcal vaccine
+G0010,Administration of hepatitis B vaccine
+G0101,Cervical or vaginal cancer screening pelvic and clinical breast examination
+G0102,Prostate cancer screening digital rectal examination
+G0103,Prostate cancer screening prostate specific antigen test PSA
+G0117,Glaucoma screening furnished by an optometrist or ophthalmologist
+G0143,Screening cytopathology cervical or vaginal manual
+G0202,Screening mammography producing direct 2-D digital image bilateral
+G0297,Low dose CT scan LDCT for lung cancer screening
+G0402,Initial preventive physical examination IPPE
+G0438,Annual wellness visit includes a personalized prevention plan of service initial visit
+G0439,Annual wellness visit includes a personalized prevention plan of service subsequent visit
+G0442,Annual alcohol misuse screening 15 minutes
+G0444,Annual depression screening 15 minutes
+G0473,Face-to-face behavioral counseling for obesity group 2-10 30 minutes
+G0480,Drug test definitive utilizing drug identification methods 1-7 drug classes
+H0001,Alcohol and/or drug assessment
+H0004,Behavioral health counseling and therapy per 15 minutes
+H0005,Alcohol and/or drug services group counseling by a clinician
+H0031,Mental health assessment by non-physician
+H2011,Crisis intervention service per 15 minutes
+H2017,Psychosocial rehabilitation services per 15 minutes
+J0129,Injection abatacept 10 mg
+J0135,Injection adalimumab 20 mg
+J0150,Injection adenosine for therapeutic use 6 mg
+J0290,Injection ampicillin sodium 500 mg
+J0696,Injection ceftriaxone sodium per 250 mg
+J0780,Injection prochlorperazine up to 10 mg
+J1100,Injection dexamethasone sodium phosphate 1 mg
+J1170,Injection hydromorphone up to 4 mg
+J1200,Injection diphenhydramine HCl up to 50 mg
+J1644,Injection heparin sodium per 1000 units
+J1815,Injection insulin per 5 units
+J1885,Injection ketorolac tromethamine per 15 mg
+J2270,Injection morphine sulfate up to 10 mg
+J2543,Injection piperacillin sodium/tazobactam sodium 1 g/0.125 g
+J2550,Injection promethazine HCl up to 50 mg
+J2792,Injection Rho D immune globulin intravenous human solvent detergent 100 IU
+J3030,Injection sumatriptan succinate 6 mg
+J3301,Injection triamcinolone acetonide per 10 mg
+J3415,Injection pyridoxine HCl 100 mg
+J3420,Injection vitamin B-12 cyanocobalamin up to 1000 mcg
+J3490,Unclassified drugs
+J7050,Infusion normal saline solution 250 cc
+J7060,5% dextrose/water 500 ml
+J7070,Infusion D-5-W 1000 cc
+J7613,Albuterol inhalation solution FDA-approved final product non-compounded unit dose 1 mg
+J7620,Albuterol up to 2.5 mg and ipratropium bromide up to 0.5 mg FDA-approved final product
+J8499,Prescription drug oral non-chemotherapeutic NOS
+J9070,Cyclophosphamide 100 mg
+J9100,Injection cytarabine 100 mg
+J9263,Injection oxaliplatin 0.5 mg
+J9355,Injection trastuzumab 10 mg
+L0140,Cervical multiple post collar molded
+L0450,TLSO flexible custom fabricated
+L1832,Knee orthosis adjustable knee joints positional orthosis rigid support prefabricated
+L1845,Knee orthosis double upright thigh and calf with adjustable flexion and extension joint
+L1902,Ankle foot orthosis ankle gauntlet
+L1971,Ankle foot orthosis plastic with ankle joint prefabricated
+L3650,Shoulder orthosis figure of eight design abduction restrainer
+L3908,Wrist hand orthosis wrist extension control cock-up non molded prefabricated
+L3960,Shoulder elbow wrist hand orthosis airplane design abduction positioning custom fabricated
+M1003,Anti-thrombotic therapy prescribed at discharge
+P9010,Blood whole for transfusion per unit
+P9612,Catheterization for collection of specimen single patient all places of service
+P9615,Catheterization for collection of specimen multiple patients
+Q3014,Telehealth originating site facility fee
+Q4001,Casting supplies body cast adult with or without head plaster
+Q4010,Cast supplies short arm cast adult 11 years plus fiberglass
+Q4081,Injection epoetin alfa 100 units for ESRD on dialysis
+Q5101,Injection filgrastim-sndz biosimilar 1 microgram
+R0070,Transportation of portable x-ray equipment and personnel to home or nursing home single patient
+S0257,Counseling and discussion regarding advance directives or end of life care planning
+S9123,Nursing care in the home by registered nurse per hour
+S9124,Nursing care in the home by licensed practical nurse per hour
+S9131,Physical therapy in the home per diem
+T1019,Personal care services per 15 minutes
+T1023,Screening to determine the appropriateness of consideration for program participation
+V2020,Frames purchases
+V2100,Sphere single vision plano to plus or minus 4.00 per lens
+V2200,Sphere bifocal plano to plus or minus 4.00 per lens
+V2300,Sphere trifocal plano to plus or minus 4.00 per lens
+V5020,Conformity evaluation hearing aid
+V5261,Hearing aid digital binaural ITE
