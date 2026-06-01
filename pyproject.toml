@@ -19,11 +19,18 @@ dependencies = [
     "numpy>=1.26",
 ]
 
+[project.optional-dependencies]
+# Only needed to format/export the vision-language fine-tuning dataset
+# (hcfa_synth.format_for_vlm). Kept out of core so synth + eval stay light.
+vlm = ["datasets>=2.19"]
+
 [project.scripts]
 hcfa-synth = "hcfa_synth.__main__:main"
+hcfa-eval = "hcfa_eval.cli:main"
+hcfa-format-vlm = "hcfa_synth.format_for_vlm:main"
 
 [tool.setuptools.packages.find]
-include = ["hcfa_synth*"]
+include = ["hcfa_synth*", "hcfa_eval*"]
 
 [tool.setuptools.package-data]
 hcfa_synth = ["codes/*.csv"]

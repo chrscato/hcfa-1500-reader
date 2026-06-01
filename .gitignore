@@ -17,7 +17,7 @@ data/
 !examples/**
 !form-cms1500.pdf
 !docs/**/*.png
-
+token.txt
 # IDE
 .vscode/
 .idea/

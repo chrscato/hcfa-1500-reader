@@ -76,6 +76,28 @@ python -m hcfa_synth generate --count 500 --tiers all --seed 0 --out ./data/full
 
 This takes ~5 minutes at 300 DPI and produces ~2.5 GB.
 
+## Fine-tuning
+
+Format the splits into a vision-language dataset (one fixed prompt + flat-JSON target
+per image, images embedded so it's portable) and publish it to the Hub:
+
+```bash
+# build a local HF DatasetDict (train/validation/test)
+python -m hcfa_synth.format_for_vlm --out data/hf_vlm
+
+# authenticate once, then build + push in one step
+huggingface-cli login            # or: export HF_TOKEN=...
+python -m hcfa_synth.format_for_vlm --out data/hf_vlm --push --hub-repo-id <user>/hcfa-1500
+```
+
+> Use `push_to_hub` (above), **not** `huggingface_hub.upload_folder(".")` — the latter
+> uploads the whole repo as loose files, which `load_dataset` can't read.
+
+Then open [`notebooks/finetune_qwen2_5_vl_hcfa.ipynb`](./notebooks/finetune_qwen2_5_vl_hcfa.ipynb)
+in Colab: it loads the dataset from the Hub, QLoRA-fine-tunes **Qwen2.5-VL-3B**, and
+scores the `test` split with the `hcfa_eval` harness (per-tier, per-class, CER, JSON
+validity).
+
 ## Project structure
 
 ```
@@ -98,7 +120,6 @@ hcfa-1500-reader/
 
 ## Known limitations (v0)
 
-- Checkbox/radio appearance marks (sex M/F, insurance type, yes/no boxes) may not render visually in the PNG — the `/V` values are set in the PDF correctly, so semantic extractors are unaffected. Fix planned: write `/AP` appearance streams for buttons.
 - Box 32 facility NPI is unmapped (one of the numeric-named PDF fields).
 - Handwriting tier deferred to v0.2.
 

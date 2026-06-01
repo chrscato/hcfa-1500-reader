@@ -19,6 +19,8 @@ from pypdf.generic import BooleanObject, NameObject
 
 DEFAULT_TEMPLATE = Path(__file__).resolve().parent.parent / "form-cms1500.pdf"
 
+_OFF_STATE = NameObject("/Off")
+
 # Logical → PDF radio export value
 _RELATIONSHIP_RADIO = {"self": "S", "spouse": "M", "child": "C", "other": "O"}
 _INSURANCE_TYPE_RADIO = {
@@ -229,6 +231,38 @@ def record_to_fields(record: Dict[str, Any]) -> Dict[str, str]:
     return f
 
 
+def _sync_button_appearance_states(writer: pypdf.PdfWriter) -> None:
+    """Point each button widget's /AS at the on-state matching the field's /V.
+
+    pypdf sets /V on a /Btn (checkbox/radio) field but leaves every kid
+    widget's /AS at /Off. pypdfium2 rasterizes the appearance named by /AS,
+    so without this the checked mark is invisible even though the value is
+    correct. The on-state /AP /N appearance streams already exist in the
+    template — we only retarget /AS to the one matching /V (and force the
+    rest to /Off).
+    """
+    acroform = writer._root_object.get("/AcroForm")
+    if not acroform:
+        return
+    for ref in acroform.get("/Fields", []):
+        field = ref.get_object()
+        if field.get("/FT") != "/Btn":
+            continue
+        value = field.get("/V")
+        # pypdf writes /V as a TextStringObject ("M"), but /AP /N keys are
+        # PDF names ("/M"). Normalize to a name with exactly one leading slash.
+        on_state = "/" + str(value).lstrip("/") if value not in (None, "") else None
+        kids = field.get("/Kids")
+        widgets = [k.get_object() for k in kids] if kids else [field]
+        for widget in widgets:
+            ap = widget.get("/AP")
+            states = list(ap["/N"].keys()) if ap and "/N" in ap else []
+            if on_state is not None and on_state in states:
+                widget[NameObject("/AS")] = NameObject(on_state)
+            else:
+                widget[NameObject("/AS")] = _OFF_STATE
+
+
 def fill_pdf(record: Dict[str, Any], template_path: Path | str = DEFAULT_TEMPLATE) -> bytes:
     """Fill the CMS-1500 template with a record and return the PDF bytes."""
     template_path = Path(template_path)
@@ -249,6 +283,9 @@ def fill_pdf(record: Dict[str, Any], template_path: Path | str = DEFAULT_TEMPLAT
         writer._root_object[NameObject("/AcroForm")] = writer._root_object.get("/AcroForm")
     acroform = writer._root_object["/AcroForm"]
     acroform[NameObject("/NeedAppearances")] = BooleanObject(True)
+
+    # Retarget button widgets' /AS so the checked marks actually rasterize.
+    _sync_button_appearance_states(writer)
 
     buf = io.BytesIO()
     writer.write(buf)
