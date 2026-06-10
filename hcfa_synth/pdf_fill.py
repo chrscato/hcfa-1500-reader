@@ -11,15 +11,49 @@ on each /Btn field. See _RADIO_VALUES below.
 from __future__ import annotations
 
 import io
+import random
+import re
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import pypdf
-from pypdf.generic import BooleanObject, NameObject
+from pypdf.generic import ArrayObject, BooleanObject, FloatObject, NameObject
 
 DEFAULT_TEMPLATE = Path(__file__).resolve().parent.parent / "form-cms1500.pdf"
 
 _OFF_STATE = NameObject("/Off")
+
+_TEXT_DATE_RE = re.compile(r"^(\d{1,2})/(\d{1,2})/(\d{4})$")
+
+
+def _year_box(date_dict: Dict[str, str], year_digits: int) -> str:
+    """Render a split year box as 2- or 4-digit. Blank stays blank.
+
+    Writing 4 digits into the narrow YY cell intentionally overflows it — a
+    common look on real claims that the v1 model never saw (it only ever read
+    2-digit years). Ground truth is unaffected; it always carries the full year.
+    """
+    if not date_dict.get("mm"):
+        return date_dict.get("yy", "")
+    if year_digits == 4:
+        return date_dict.get("yyyy") or date_dict.get("yy", "")
+    return date_dict.get("yy", "")
+
+
+def _restyle_text_date(canonical: str, rng: random.Random) -> str:
+    """Vary a canonical MM/DD/YYYY free-text date: separator, 2- vs 4-digit
+    year, optional leading-zero stripping. Ground truth stays canonical."""
+    m = _TEXT_DATE_RE.match(canonical or "")
+    if not m:
+        return canonical
+    mm, dd, yyyy = m.groups()
+    sep = rng.choice(["/", "/", "-", "."])
+    year = yyyy if rng.random() < 0.6 else yyyy[2:]
+    if rng.random() < 0.30:
+        mm, dd = str(int(mm)), str(int(dd))
+    else:
+        mm, dd = f"{int(mm):02d}", f"{int(dd):02d}"
+    return f"{mm}{sep}{dd}{sep}{year}"
 
 # Logical → PDF radio export value
 _RELATIONSHIP_RADIO = {"self": "S", "spouse": "M", "child": "C", "other": "O"}
@@ -44,13 +78,28 @@ def _fmt_phone(phone: Dict[str, str]) -> str:
     return phone["number"]
 
 
-def record_to_fields(record: Dict[str, Any]) -> Dict[str, str]:
+def record_to_fields(record: Dict[str, Any], rng: Optional[random.Random] = None) -> Dict[str, str]:
     """Flatten a record into a {pdf_field_name: value} dict.
 
     Returns string values only. Empty strings clear a field; missing keys
     leave whatever default was in the template.
+
+    `rng` enables *render-time display variety* — 2- vs 4-digit years in the
+    split date boxes and separator/format variety in free-text dates. This
+    changes only how values look on the rasterized form, never the ground
+    truth: call with `rng=None` (the default) to get the canonical values that
+    ground_truth.py scores against.
     """
     f: Dict[str, str] = {}
+
+    # Per-form display choices (only when rendering, not for ground truth).
+    year_digits = 4 if (rng is not None and rng.random() < 0.35) else 2
+
+    def _yr(date_dict: Dict[str, str]) -> str:
+        return _year_box(date_dict, year_digits)
+
+    def _txt_date(canonical: str) -> str:
+        return _restyle_text_date(canonical, rng) if rng is not None else canonical
 
     # --- Insurance carrier (top right block) ---
     ins = record["insurance"]
@@ -70,7 +119,7 @@ def record_to_fields(record: Dict[str, Any]) -> Dict[str, str]:
     # --- Box 3 DOB + sex ---
     f["birth_mm"] = pt["dob"]["mm"]
     f["birth_dd"] = pt["dob"]["dd"]
-    f["birth_yy"] = pt["dob"]["yy"]
+    f["birth_yy"] = _yr(pt["dob"])
     f["sex"] = pt["sex"]
 
     # --- Box 4 insured's name ---
@@ -116,36 +165,36 @@ def record_to_fields(record: Dict[str, Any]) -> Dict[str, str]:
     f["ins_policy"] = insured["policy_group"]
     f["ins_dob_mm"] = insured["dob"]["mm"]
     f["ins_dob_dd"] = insured["dob"]["dd"]
-    f["ins_dob_yy"] = insured["dob"]["yy"]
+    f["ins_dob_yy"] = _yr(insured["dob"])
     f["ins_sex"] = _INSURED_SEX_RADIO.get(insured["sex"], "MALE")
     f["ins_benefit_plan"] = insured["another_benefit_plan"]
     f["ins_plan_name"] = insured["plan_name"]
 
     # --- Box 12 / 13 signatures ---
     f["pt_signature"] = pt["signature"]
-    f["pt_date"] = pt["signature_date"]
+    f["pt_date"] = _txt_date(pt["signature_date"])
     f["ins_signature"] = insured["signature"]
 
     # --- Box 14 / 15 / 16 / 18 dates ---
     d = record["dates"]
     f["cur_ill_mm"] = d["current_illness"]["mm"]
     f["cur_ill_dd"] = d["current_illness"]["dd"]
-    f["cur_ill_yy"] = d["current_illness"]["yy"]
+    f["cur_ill_yy"] = _yr(d["current_illness"])
     f["sim_ill_mm"] = d["other_date"]["mm"]
     f["sim_ill_dd"] = d["other_date"]["dd"]
-    f["sim_ill_yy"] = d["other_date"]["yy"]
+    f["sim_ill_yy"] = _yr(d["other_date"])
     f["work_mm_from"] = d["unable_to_work_from"]["mm"]
     f["work_dd_from"] = d["unable_to_work_from"]["dd"]
-    f["work_yy_from"] = d["unable_to_work_from"]["yy"]
+    f["work_yy_from"] = _yr(d["unable_to_work_from"])
     f["work_mm_end"] = d["unable_to_work_to"]["mm"]
     f["work_dd_end"] = d["unable_to_work_to"]["dd"]
-    f["work_yy_end"] = d["unable_to_work_to"]["yy"]
+    f["work_yy_end"] = _yr(d["unable_to_work_to"])
     f["hosp_mm_from"] = d["hospitalization_from"]["mm"]
     f["hosp_dd_from"] = d["hospitalization_from"]["dd"]
-    f["hosp_yy_from"] = d["hospitalization_from"]["yy"]
+    f["hosp_yy_from"] = _yr(d["hospitalization_from"])
     f["hosp_mm_end"] = d["hospitalization_to"]["mm"]
     f["hosp_dd_end"] = d["hospitalization_to"]["dd"]
-    f["hosp_yy_end"] = d["hospitalization_to"]["yy"]
+    f["hosp_yy_end"] = _yr(d["hospitalization_to"])
 
     # --- Box 17 referring provider ---
     ref = record["referring_provider"]
@@ -178,10 +227,10 @@ def record_to_fields(record: Dict[str, Any]) -> Dict[str, str]:
             break
         f[f"sv{i}_mm_from"] = line["date_from"]["mm"]
         f[f"sv{i}_dd_from"] = line["date_from"]["dd"]
-        f[f"sv{i}_yy_from"] = line["date_from"]["yy"]
+        f[f"sv{i}_yy_from"] = _yr(line["date_from"])
         f[f"sv{i}_mm_end"] = line["date_to"]["mm"]
         f[f"sv{i}_dd_end"] = line["date_to"]["dd"]
-        f[f"sv{i}_yy_end"] = line["date_to"]["yy"]
+        f[f"sv{i}_yy_end"] = _yr(line["date_to"])
         f[f"place{i}"] = line["place_of_service"]
         f[f"emg{i}"] = line["emg"]
         f[f"cpt{i}"] = line["cpt"]
@@ -208,7 +257,7 @@ def record_to_fields(record: Dict[str, Any]) -> Dict[str, str]:
 
     # --- Box 31 physician signature ---
     f["physician_signature"] = bill["physician_signature"]
-    f["physician_date"] = bill["physician_signature_date"]
+    f["physician_date"] = _txt_date(bill["physician_signature_date"])
 
     # --- Box 32 service facility ---
     fac = record["service_facility"]
@@ -263,13 +312,69 @@ def _sync_button_appearance_states(writer: pypdf.PdfWriter) -> None:
                 widget[NameObject("/AS")] = _OFF_STATE
 
 
-def fill_pdf(record: Dict[str, Any], template_path: Path | str = DEFAULT_TEMPLATE) -> bytes:
-    """Fill the CMS-1500 template with a record and return the PDF bytes."""
+def _apply_field_jitter(
+    writer: pypdf.PdfWriter,
+    rng: random.Random,
+    prob: float,
+    max_shift_pt: float = 2.5,
+) -> None:
+    """Nudge text-field widget rectangles by a few PDF points.
+
+    With /NeedAppearances set, the renderer redraws each value inside its
+    (now shifted) /Rect, so a downward/upward nudge makes digits cross the
+    printed cell gridlines and a sideways nudge pushes long values over their
+    box edge. This reproduces the misaligned, overflowing handwriting/print
+    seen on real scanned claims — something v1's pixel-perfect forms lacked.
+
+    Only /Tx (text) widgets are touched; buttons/radios are left alone so the
+    checkbox-appearance sync below stays valid.
+    """
+    for page in writer.pages:
+        annots = page.get("/Annots")
+        if not annots:
+            continue
+        for ref in annots:
+            widget = ref.get_object()
+            if widget.get("/Subtype") != "/Widget":
+                continue
+            ft = widget.get("/FT")
+            if ft is None and "/Parent" in widget:
+                ft = widget["/Parent"].get_object().get("/FT")
+            if ft != "/Tx":
+                continue
+            if rng.random() > prob:
+                continue
+            rect = widget.get("/Rect")
+            if not rect or len(rect) != 4:
+                continue
+            x0, y0, x1, y1 = (float(v) for v in rect)
+            dx = rng.uniform(-max_shift_pt, max_shift_pt)
+            dy = rng.uniform(-max_shift_pt, max_shift_pt)
+            widget[NameObject("/Rect")] = ArrayObject(
+                [FloatObject(x0 + dx), FloatObject(y0 + dy),
+                 FloatObject(x1 + dx), FloatObject(y1 + dy)]
+            )
+
+
+def fill_pdf(
+    record: Dict[str, Any],
+    template_path: Path | str = DEFAULT_TEMPLATE,
+    *,
+    rng: Optional[random.Random] = None,
+    jitter: float = 0.0,
+) -> bytes:
+    """Fill the CMS-1500 template with a record and return the PDF bytes.
+
+    `rng` enables render-time display variety (year-digit and date-format
+    variety) and seeds the optional field jitter. `jitter` is the per-field
+    probability of a positional nudge (0 disables it). Both default off so
+    ground-truth generation and existing callers/tests are unaffected.
+    """
     template_path = Path(template_path)
     reader = pypdf.PdfReader(str(template_path))
     writer = pypdf.PdfWriter(clone_from=reader)
 
-    field_values = record_to_fields(record)
+    field_values = record_to_fields(record, rng=rng)
 
     # Page 2 of the CMS-1500 has no fields; only update pages that do.
     for page in writer.pages:
@@ -286,6 +391,11 @@ def fill_pdf(record: Dict[str, Any], template_path: Path | str = DEFAULT_TEMPLAT
 
     # Retarget button widgets' /AS so the checked marks actually rasterize.
     _sync_button_appearance_states(writer)
+
+    # Positional jitter must run after values are set (so the widgets exist)
+    # and only on text fields, leaving the button /AS sync above intact.
+    if jitter > 0 and rng is not None:
+        _apply_field_jitter(writer, rng, prob=jitter)
 
     buf = io.BytesIO()
     writer.write(buf)

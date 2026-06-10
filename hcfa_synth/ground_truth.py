@@ -22,7 +22,10 @@ from hcfa_synth.pdf_fill import record_to_fields
 
 
 def _format_dob(dob: Dict[str, str]) -> str:
-    """MM/DD/YYYY — convert 2-digit year using century heuristic (≥50 → 19xx)."""
+    """MM/DD/YYYY. Prefer the canonical 4-digit year; fall back to a century
+    heuristic (<50 → 20xx) only for legacy records that lack `yyyy`."""
+    if dob.get("yyyy"):
+        return f"{dob['mm']}/{dob['dd']}/{int(dob['yyyy']):04d}"
     yy = int(dob["yy"])
     yyyy = 2000 + yy if yy < 50 else 1900 + yy
     return f"{dob['mm']}/{dob['dd']}/{yyyy:04d}"

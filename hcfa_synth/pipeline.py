@@ -10,6 +10,7 @@ Pipeline per sample:
 from __future__ import annotations
 
 import json
+import random
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, List, Optional
@@ -47,7 +48,20 @@ def generate_sample(
     tier_dir.mkdir(parents=True, exist_ok=True)
 
     record = build_record(seed=seed)
-    pdf_bytes = fill_pdf(record)
+    # Separate RNG stream for render-time display variety (year-digit/date
+    # formats) and positional jitter, so it stays independent of the content
+    # RNG inside build_record. Jitter ("digits over the lines") is heavier on
+    # lower-quality tiers, which is where misaligned print actually shows up.
+    render_rng = random.Random(seed * 2 + 1)
+    jitter = {
+        "pristine": 0.0,
+        "clean_scan": 0.08,
+        "worn_scan": 0.22,
+        "fax": 0.22,
+        "phone_photo": 0.18,
+        "worst": 0.40,
+    }.get(tier, 0.15)
+    pdf_bytes = fill_pdf(record, rng=render_rng, jitter=jitter)
     base_image = pdf_to_png(pdf_bytes, dpi=dpi)
     # Use the same seed for augmentation determinism — each (seed, tier) pair
     # produces a unique sample.

@@ -36,3 +36,5 @@ __render_test.*
 
 # Unrelated local docs (excluded from this OSS repo)
 wcfs-mvp-plan.md
+
+*.env

@@ -1,0 +1,3 @@
+model,n_samples,populated_norm_acc,blank_norm_acc,tier_pristine_norm_acc,tier_clean_scan_norm_acc,tier_worn_scan_norm_acc,tier_fax_norm_acc,tier_phone_photo_norm_acc,tier_worst_norm_acc,class_dates_exact,class_money_exact,class_npis_exact,class_codes_exact,class_names_exact,class_addresses_exact,cer_codes,cer_money,cer_npis,cer_overall,json_valid_rate,json_parse_rate
+qwen2.5vl-3b-hcfa @png(deployed),24,0.8553,0.8941,0.9482,0.9088,0.9012,0.6433,0.8698,0.8716,0.9167,0.8692,0.681,0.9036,0.9421,0.8494,0.0858,0.1308,0.2793,0.1749,0.6667,0.75
+qwen2.5vl-3b-hcfa @png(deployed),24,0.8548,0.8941,0.9482,0.9058,0.9012,0.6433,0.8698,0.8716,0.9167,0.8692,0.681,0.9036,0.9421,0.8494,0.0858,0.1308,0.2784,0.1746,0.6667,0.75

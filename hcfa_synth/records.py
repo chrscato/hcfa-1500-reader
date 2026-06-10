@@ -34,7 +34,15 @@ RELATIONSHIP_TO_INSURED = ["self", "spouse", "child", "other"]
 
 
 def _mmddyy(d: date) -> Dict[str, str]:
-    return {"mm": f"{d.month:02d}", "dd": f"{d.day:02d}", "yy": f"{d.year % 100:02d}"}
+    # Carry the full 4-digit year alongside the legacy 2-digit form. Ground
+    # truth reads `yyyy` directly, so birth years before 2000 stay correct
+    # (the old century heuristic mislabeled e.g. 1936 as 2036).
+    return {
+        "mm": f"{d.month:02d}",
+        "dd": f"{d.day:02d}",
+        "yy": f"{d.year % 100:02d}",
+        "yyyy": f"{d.year:04d}",
+    }
 
 
 def _mmddyyyy(d: date) -> str:
@@ -45,12 +53,52 @@ def _money(amount: float) -> str:
     return f"{amount:.2f}"
 
 
-def _person_name(fake: Faker, sex: str) -> Dict[str, str]:
+# Surname particles for realistic two-word last names (e.g. "VAN DYKE",
+# "DE LA CRUZ", "ST JOHN"). Real claims have plenty of these.
+_SURNAME_PARTICLES = [
+    "VAN", "VON", "DE", "DEL", "DE LA", "LA", "DELA", "DA", "DI",
+    "ST", "MC", "MAC", "LE", "VANDER",
+]
+
+
+def _last_name(fake: Faker, rng: random.Random) -> str:
+    """Surname with realistic variety.
+
+    ~70% single token, ~18% two-word (particle prefix or two surnames),
+    ~12% hyphenated double-barrel. v1 emitted only single-token surnames,
+    so the model never saw "DE LA CRUZ" or "SMITH-JONES".
+    """
+    base = fake.last_name().upper()
+    r = rng.random()
+    if r < 0.12:
+        return f"{base}-{fake.last_name().upper()}"
+    if r < 0.30:
+        if rng.random() < 0.55:
+            return f"{rng.choice(_SURNAME_PARTICLES)} {base}"
+        return f"{base} {fake.last_name().upper()}"
+    return base
+
+
+def _middle(fake: Faker, rng: random.Random) -> str:
+    """Middle field with realistic variety.
+
+    ~40% blank, ~45% single initial, ~15% spelled-out middle name. v1 always
+    emitted a single initial, which over-fit the model to "middle is present".
+    """
+    r = rng.random()
+    if r < 0.40:
+        return ""
+    if r < 0.85:
+        return fake.random_uppercase_letter()
+    return fake.first_name().upper()
+
+
+def _person_name(fake: Faker, sex: str, rng: random.Random) -> Dict[str, str]:
     first = fake.first_name_male() if sex == "M" else fake.first_name_female()
     return {
         "first": first.upper(),
-        "middle": fake.random_uppercase_letter(),
-        "last": fake.last_name().upper(),
+        "middle": _middle(fake, rng),
+        "last": _last_name(fake, rng),
     }
 
 
@@ -132,7 +180,7 @@ def build_record(seed: Optional[int] = None) -> Dict[str, Any]:
     patient_sex = rng.choice(["M", "F"])
     today = date.today()
     patient_dob = today - timedelta(days=rng.randint(365 * 1, 365 * 90))
-    patient_name = _person_name(fake, patient_sex)
+    patient_name = _person_name(fake, patient_sex, rng)
     patient_address = _address(fake)
     patient_phone = _phone(fake)
     relationship = rng.choices(RELATIONSHIP_TO_INSURED, weights=[60, 25, 12, 3])[0]
@@ -147,7 +195,7 @@ def build_record(seed: Optional[int] = None) -> Dict[str, Any]:
     else:
         insured_sex = rng.choice(["M", "F"])
         insured_dob = today - timedelta(days=rng.randint(365 * 18, 365 * 75))
-        insured_name = _person_name(fake, insured_sex)
+        insured_name = _person_name(fake, insured_sex, rng)
         insured_address = _address(fake)
         insured_phone = _phone(fake)
 
@@ -171,7 +219,7 @@ def build_record(seed: Optional[int] = None) -> Dict[str, Any]:
     has_other_insured = rng.random() < 0.30
     other_insured = None
     if has_other_insured:
-        other_name = _person_name(fake, rng.choice(["M", "F"]))
+        other_name = _person_name(fake, rng.choice(["M", "F"]), rng)
         other_insured = {
             "name": f"{other_name['last']}, {other_name['first']} {other_name['middle']}",
             "policy_or_group": f"{rng.randint(10000, 99999)}",
@@ -198,7 +246,7 @@ def build_record(seed: Optional[int] = None) -> Dict[str, Any]:
     hosp_dates_present = rng.random() < 0.10
 
     def _blank_date() -> Dict[str, str]:
-        return {"mm": "", "dd": "", "yy": ""}
+        return {"mm": "", "dd": "", "yy": "", "yyyy": ""}
 
     dates = {
         "current_illness": _mmddyy(current_illness),
@@ -215,7 +263,7 @@ def build_record(seed: Optional[int] = None) -> Dict[str, Any]:
     referring_npi = generate_npi(rng) if referring_provider_present else ""
     referring_name = ""
     if referring_provider_present:
-        ref = _person_name(fake, rng.choice(["M", "F"]))
+        ref = _person_name(fake, rng.choice(["M", "F"]), rng)
         referring_name = f"DR. {ref['first']} {ref['last']}"
 
     facility_npi = generate_npi(rng, organization=True)
@@ -243,7 +291,7 @@ def build_record(seed: Optional[int] = None) -> Dict[str, Any]:
     else:
         tax_id = f"{rng.randint(10, 99)}-{rng.randint(1000000, 9999999)}"
 
-    physician_name_parts = _person_name(fake, rng.choice(["M", "F"]))
+    physician_name_parts = _person_name(fake, rng.choice(["M", "F"]), rng)
     physician_signature = f"{physician_name_parts['first']} {physician_name_parts['last']} MD"
 
     facility_address = _address(fake)
